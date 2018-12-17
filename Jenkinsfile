@@ -39,9 +39,9 @@ node{
       }
    
    stage('Docker Login ECR'){
-    sh 'DOCKER_LOGIN="$(AWS_SHARED_CREDENTIALS_FILE=/var/lib/jenkins/credentials AWS_CONFIG_FILE=/var/lib/jenkins/config aws ecr get-login --no-include-email --region us-west-1 )" \
-        ${DOCKER_LOGIN}'      
-      }
+    sh "DOCKER_LOGIN="$( AWS_SHARED_CREDENTIALS_FILE=/var/lib/jenkins/credentials AWS_CONFIG_FILE=/var/lib/jenkins/config aws ecr get-login --no-include-email --region us-west-1 )"      
+    sh "${DOCKER_LOGIN}"  
+   }
    
    stage('Push Image to ECR'){
     sh 'docker push 367484709954.dkr.ecr.us-west-1.amazonaws.com/sample:latest'      
