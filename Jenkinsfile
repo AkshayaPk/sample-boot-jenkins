@@ -11,7 +11,13 @@ node{
    stage('SonarQube Analysis') {
         def mvnHome =  tool name: 'mitchell-rms-mvn', type: 'maven'
         withSonarQubeEnv('mitchell-rms') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar"
+          sh "${mvnHome}/bin/mvn sonar:sonar \
+                   -Dsonar.projectKey=AkshayaPk_sample-boot-jenkins \
+                   -Dsonar.organization=akshayapk-github \
+                   -Dsonar.branch.name=master \
+                   -Dsonar.host.url=https://sonarcloud.io \
+                   -Dsonar.login=8b35d2d04ebd56846cefaf1e7d1332d8ddcc5a9a"
+           
         }
     }
     
