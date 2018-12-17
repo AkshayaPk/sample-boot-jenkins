@@ -39,7 +39,7 @@ node{
       }
    
    stage('Docker Login ECR'){
-    sh 'DOCKER_LOGIN="$(AWS_SHARED_CREDENTIALS_FILE=/var/lib/jenkins/credentials AWS_CONFIG_FILE=/var/lib/jenkins/config aws ecr get-login --no-include-email --region us-west-1)"'
+    sh DOCKER_LOGIN="$(AWS_SHARED_CREDENTIALS_FILE=/var/lib/jenkins/credentials AWS_CONFIG_FILE=/var/lib/jenkins/config aws ecr get-login --no-include-email --region us-west-1)"
    }
    
    stage('Docker ECR Get Login'){
