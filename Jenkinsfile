@@ -20,7 +20,7 @@ node{
            
         }
     }
-    
+//Added quality gate check    
    stage("Quality Gate Status Check"){
           timeout(time: 3, unit: 'HOURS') {
               def qg = waitForQualityGate()
