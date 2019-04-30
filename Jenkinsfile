@@ -30,22 +30,4 @@ node{
           }
       }
    
-   stage('Build Docker Image'){
-    sh 'docker build -t sample .'
-      }
-   
-   stage('Tag Docker Image'){
-    sh 'docker tag sample:latest 367484709954.dkr.ecr.us-west-1.amazonaws.com/sample:latest'
-      }
-   
-   stage('Docker Login & Push to ECR'){
-      sh '$(AWS_SHARED_CREDENTIALS_FILE=/var/lib/jenkins/credentials AWS_CONFIG_FILE=/var/lib/jenkins/config aws ecr get-login --no-include-email --region us-west-1 )' 
-      sh 'docker push 367484709954.dkr.ecr.us-west-1.amazonaws.com/sample:latest'
-   }
-  
-   
-   stage('Force New Deployment'){
-    sh 'AWS_SHARED_CREDENTIALS_FILE=/var/lib/jenkins/credentials AWS_CONFIG_FILE=/var/lib/jenkins/config aws ecs update-service --cluster mitchell-rms --service sample-service --task-definition sample-task-def --force-new-deployment'      
-      }
-   
 }
